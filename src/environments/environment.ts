@@ -5,4 +5,3 @@ export const environment = {
   defaultLongitude: 0,
   defaultLatitude: 0,
 };
-a8b77090be1f1ba5121c6a5c04e20f35
