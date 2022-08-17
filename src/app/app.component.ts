@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { Weather } from './interfaces/weather.interface';
+import { Current } from './interfaces/current-weather.interface';
 import { CurrentCoords } from './interfaces/current-coords.interface';
+import { Weather } from './interfaces/weather.interface';
 
 // RxJS
+import { EMPTY, iif } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Services
@@ -18,7 +20,12 @@ import { WeatherService } from './services/weather.service';
 })
 export class AppComponent implements OnInit {
   fetchedWeather!: any;
+
   currentCoords!: CurrentCoords;
+
+  currentWeather!: Current;
+
+  ready: boolean = false;
 
   constructor(
     private geolocationService: GeolocationService,
@@ -32,16 +39,26 @@ export class AppComponent implements OnInit {
         switchMap((_currentCoords: CurrentCoords) => {
           this.currentCoords = _currentCoords;
 
-          return this.weatherService.getWeather(
-            this.currentCoords.latitude!,
-            this.currentCoords.longitude!
+          return iif(
+            () =>
+              this.currentCoords.latitude == 0 &&
+              this.currentCoords.longitude == 0,
+            EMPTY,
+            this.weatherService.getWeather(
+              this.currentCoords.latitude!,
+              this.currentCoords.longitude!
+            )
           );
         })
       )
       .subscribe((_weather: Weather) => {
         this.fetchedWeather = _weather;
 
-        console.log(this.weatherService.getNext24Hours(_weather));
+        this.currentWeather = this.weatherService.getCurrent(
+          this.fetchedWeather
+        );
+
+        this.ready = true;
       });
   }
 }

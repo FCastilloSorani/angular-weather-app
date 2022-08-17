@@ -8,10 +8,12 @@ import { CurrentComponent } from './components/current/current.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { WeatherIconComponent } from './components/weather-icon/weather-icon.component';
 
 @NgModule({
-  declarations: [AppComponent, CurrentComponent],
-  imports: [AppRoutingModule, BrowserModule, HttpClientModule],
+  declarations: [AppComponent, CurrentComponent, WeatherIconComponent],
+  imports: [AppRoutingModule, BrowserModule, HttpClientModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

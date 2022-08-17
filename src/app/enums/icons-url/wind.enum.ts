@@ -1,0 +1,15 @@
+export enum WindIconsURL {
+  WIND_0 = 'assets/svg/weather/wind-beaufort-0.svg',
+  WIND_1 = 'assets/svg/weather/wind-beaufort-1.svg',
+  WIND_2 = 'assets/svg/weather/wind-beaufort-2.svg',
+  WIND_3 = 'assets/svg/weather/wind-beaufort-3.svg',
+  WIND_4 = 'assets/svg/weather/wind-beaufort-4.svg',
+  WIND_5 = 'assets/svg/weather/wind-beaufort-5.svg',
+  WIND_6 = 'assets/svg/weather/wind-beaufort-6.svg',
+  WIND_7 = 'assets/svg/weather/wind-beaufort-7.svg',
+  WIND_8 = 'assets/svg/weather/wind-beaufort-8.svg',
+  WIND_9 = 'assets/svg/weather/wind-beaufort-9.svg',
+  WIND_10 = 'assets/svg/weather/wind-beaufort-10.svg',
+  WIND_11 = 'assets/svg/weather/wind-beaufort-11.svg',
+  WIND_12 = 'assets/svg/weather/wind-beaufort-12.svg',
+}

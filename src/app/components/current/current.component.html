@@ -1,1 +1,23 @@
-<p>current works!</p>
+<div class="container">
+  <div>
+    <app-weather-icon></app-weather-icon>
+  </div>
+  <div>
+    <span>{{ currentTemp }} °C</span>
+  </div>
+  <div>
+    <span>Humedad: {{ currentHumidity }} %</span>
+  </div>
+  <div>
+    <span>Amanecer: {{ sunrise | date: "shortTime" }}</span>
+  </div>
+  <div>
+    <span>Atardecer: {{ sunset | date: "shortTime" }}</span>
+  </div>
+  <div>
+    <span
+      >Actualizado por última vez a las
+      {{ lastUpdate | date: "mediumTime" }}</span
+    >
+  </div>
+</div>

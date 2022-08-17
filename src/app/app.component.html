@@ -1,0 +1,13 @@
+<div class="container">
+  <div *ngIf="ready; else loadingBlock">
+    <div class="current-container">
+      <app-current [fetchedCurrentWeather]="currentWeather"></app-current>
+    </div>
+  </div>
+
+  <ng-template #loadingBlock>
+    <div class="loading">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>
