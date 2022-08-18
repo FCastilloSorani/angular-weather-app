@@ -1,11 +1,4 @@
-import {
-  AtmosphereConditions,
-  CloudsConditions,
-  DrizzleConditions,
-  RainConditions,
-  SnowConditions,
-  ThunderstormConditions,
-} from '../enums/weather-conditions.enum';
+import { WeatherIconData } from './weather-icon-data.interface';
 
 export interface CurrentWeather {
   dt: number;
@@ -21,18 +14,5 @@ export interface CurrentWeather {
   visibility: number;
   wind_speed: number;
   wind_deg: number;
-  weather: [
-    {
-      id:
-        | ThunderstormConditions
-        | DrizzleConditions
-        | RainConditions
-        | SnowConditions
-        | AtmosphereConditions
-        | CloudsConditions;
-      main: string;
-      description: string;
-      icon: string;
-    }
-  ];
+  weather: [WeatherIconData];
 }

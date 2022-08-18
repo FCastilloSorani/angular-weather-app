@@ -1,27 +1,30 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 // Interfaces
 import { CurrentConditions } from 'src/app/interfaces/current-conditions.interface';
 import { CurrentWeather } from 'src/app/interfaces/current-weather.interface';
+import { WeatherIconData } from 'src/app/interfaces/weather-icon-data.interface';
 
 @Component({
   selector: 'app-current',
   templateUrl: './current.component.html',
   styleUrls: ['./current.component.css'],
 })
-export class CurrentComponent implements OnChanges {
+export class CurrentComponent implements OnInit {
   @Input() fetchedCurrentWeather!: CurrentWeather;
 
   currentConditions!: CurrentConditions;
 
+  weatherIconData!: WeatherIconData;
+
   constructor() {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.fetchedCurrentWeather.currentValue) {
-      this.currentConditions = this.setCurrentConditions(
-        changes.fetchedCurrentWeather.currentValue
-      );
-    }
+  ngOnInit(): void {
+    this.weatherIconData = this.fetchedCurrentWeather.weather[0];
+
+    this.currentConditions = this.setCurrentConditions(
+      this.fetchedCurrentWeather
+    );
   }
 
   setCurrentConditions(_currentWeather: CurrentWeather): CurrentConditions {
