@@ -4,11 +4,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 // Interfaces
-import { Current } from '../interfaces/current-weather.interface';
+import { CurrentWeather } from '../interfaces/current-weather.interface';
 import { Daily } from '../interfaces/daily-weather.interface';
 import { Hourly } from '../interfaces/hourly-weather.interface';
 import { Weather } from '../interfaces/weather.interface';
-
 
 // HTTP
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -30,14 +29,12 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(lat: number, lon: number): Observable<Weather> {
-    return this.http
-      .get<Weather>(
-        `/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${this.params.appid}&lang=${this.params.lang}&units=${this.params.units}&exclude=minutely`
-      )
-      .pipe(catchError(this.handleError));
+    const url = `/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${this.params.appid}&lang=${this.params.lang}&units=${this.params.units}&exclude=minutely`;
+
+    return this.http.get<Weather>(url).pipe(catchError(this.handleError));
   }
 
-  getCurrent(_weather: Weather): Current {
+  getCurrent(_weather: Weather): CurrentWeather {
     return _weather.current;
   }
 

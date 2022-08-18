@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { Current } from './interfaces/current-weather.interface';
 import { CurrentCoords } from './interfaces/current-coords.interface';
+import { CurrentWeather } from './interfaces/current-weather.interface';
 import { Weather } from './interfaces/weather.interface';
 
 // RxJS
-import { EMPTY, iif } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { iif, Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 // Services
 import { GeolocationService } from './services/geolocation.service';
@@ -19,11 +19,10 @@ import { WeatherService } from './services/weather.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  fetchedWeather!: any;
+  fetchedCurrentWeather!: CurrentWeather;
 
-  currentCoords!: CurrentCoords;
-
-  currentWeather!: Current;
+  getCurrentCoords: Observable<CurrentCoords> =
+    this.geolocationService.getCurrentCoords();
 
   ready: boolean = false;
 
@@ -33,32 +32,26 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.geolocationService
-      .getCurrentCoords()
+    this.getCurrentCoords
       .pipe(
         switchMap((_currentCoords: CurrentCoords) => {
-          this.currentCoords = _currentCoords;
-
+          return of(_currentCoords);
+        }),
+        switchMap((_currentCoords) => {
           return iif(
             () =>
-              this.currentCoords.latitude == 0 &&
-              this.currentCoords.longitude == 0,
-            EMPTY,
+              _currentCoords.latitude !== 0 && _currentCoords.longitude !== 0,
             this.weatherService.getWeather(
-              this.currentCoords.latitude!,
-              this.currentCoords.longitude!
+              _currentCoords.latitude!,
+              _currentCoords.longitude!
             )
           );
+        }),
+        tap((_weather: Weather) => {
+          this.fetchedCurrentWeather = this.weatherService.getCurrent(_weather);
+          this.ready = true;
         })
       )
-      .subscribe((_weather: Weather) => {
-        this.fetchedWeather = _weather;
-
-        this.currentWeather = this.weatherService.getCurrent(
-          this.fetchedWeather
-        );
-
-        this.ready = true;
-      });
+      .subscribe();
   }
 }

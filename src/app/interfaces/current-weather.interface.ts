@@ -7,7 +7,7 @@ import {
   ThunderstormConditions,
 } from '../enums/weather-conditions.enum';
 
-export interface Current {
+export interface CurrentWeather {
   dt: number;
   sunrise: number;
   sunset: number;

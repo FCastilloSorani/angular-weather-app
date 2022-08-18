@@ -3,21 +3,21 @@
     <app-weather-icon></app-weather-icon>
   </div>
   <div>
-    <span>{{ currentTemp }} °C</span>
+    <span>{{ currentConditions.temp }} °C</span>
   </div>
   <div>
-    <span>Humedad: {{ currentHumidity }} %</span>
+    <span>Humedad: {{ currentConditions.humidity }} %</span>
   </div>
   <div>
-    <span>Amanecer: {{ sunrise | date: "shortTime" }}</span>
+    <span>Amanecer: {{ currentConditions.sunrise | date: "shortTime" }}</span>
   </div>
   <div>
-    <span>Atardecer: {{ sunset | date: "shortTime" }}</span>
+    <span>Atardecer: {{ currentConditions.sunset | date: "shortTime" }}</span>
   </div>
   <div>
     <span
       >Actualizado por última vez a las
-      {{ lastUpdate | date: "mediumTime" }}</span
+      {{ currentConditions.lastUpdate | date: "mediumTime" }}</span
     >
   </div>
 </div>

@@ -1,10 +1,10 @@
-import { Current } from './current-weather.interface';
+import { CurrentWeather } from './current-weather.interface';
 import { Daily } from './daily-weather.interface';
 import { Hourly } from './hourly-weather.interface';
 export interface Weather {
   lat: number;
   lon: number;
-  current: Current;
+  current: CurrentWeather;
   hourly: Hourly[];
   daily: Daily[];
 }

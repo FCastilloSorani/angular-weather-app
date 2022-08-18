@@ -7,42 +7,43 @@ import { environment } from 'src/environments/environment';
 import { CurrentCoords } from '../interfaces/current-coords.interface';
 
 // HTTP
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // RxJS
-import { catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class GeolocationService {
+  private geolocation: Geolocation = navigator.geolocation;
+
   private currentCoords = new BehaviorSubject<CurrentCoords>({
     latitude: environment.defaultLatitude,
     longitude: environment.defaultLongitude,
   });
 
-  private options = {
+  private geolocationOptions = {
     enableHighAccuracy: true,
-    timeout: 5000,
     maximumAge: 0,
+    timeout: 5000,
   };
 
   constructor() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (currentPosition) => {
+    if (this.geolocation) {
+      this.geolocation.getCurrentPosition(
+        (_currentPosition) => {
           this.setCurrentCoords({
-            latitude: currentPosition.coords.latitude,
-            longitude: currentPosition.coords.longitude,
+            latitude: _currentPosition.coords.latitude,
+            longitude: _currentPosition.coords.longitude,
           });
         },
-        (error) => {
-          this.currentCoords.next({
+        (err) => {
+          this.setCurrentCoords({
             latitude: environment.defaultLatitude,
             longitude: environment.defaultLongitude,
           });
         },
-        this.options
+        this.geolocationOptions
       );
     }
   }

@@ -1,7 +1,9 @@
 <div class="container">
   <div *ngIf="ready; else loadingBlock">
     <div class="current-container">
-      <app-current [fetchedCurrentWeather]="currentWeather"></app-current>
+      <app-current
+        [fetchedCurrentWeather]="fetchedCurrentWeather"
+      ></app-current>
     </div>
   </div>
 

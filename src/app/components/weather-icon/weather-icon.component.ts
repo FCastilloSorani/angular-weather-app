@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-// Icons
-
 @Component({
   selector: 'app-weather-icon',
   templateUrl: './weather-icon.component.html',
