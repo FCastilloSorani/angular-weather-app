@@ -35,9 +35,6 @@ export class AppComponent implements OnInit {
     this.getCurrentCoords
       .pipe(
         switchMap((_currentCoords: CurrentCoords) => {
-          return of(_currentCoords);
-        }),
-        switchMap((_currentCoords) => {
           return iif(
             () =>
               _currentCoords.latitude !== 0 && _currentCoords.longitude !== 0,
@@ -49,6 +46,8 @@ export class AppComponent implements OnInit {
         }),
         tap((_weather: Weather) => {
           this.fetchedCurrentWeather = this.weatherService.getCurrent(_weather);
+        }),
+        tap(() => {
           this.ready = true;
         })
       )
