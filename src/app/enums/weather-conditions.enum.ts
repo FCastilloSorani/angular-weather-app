@@ -49,23 +49,23 @@ export enum SnowConditions {
   HeavyShowerSnow = 622,
 }
 
-export enum AtmosphereConditions {
-  Mist = 701,
-  Smoke = 711,
-  Haze = 721,
-  SandDustWhirls = 731,
-  Fog = 741,
-  Sand = 751,
-  Dust = 761,
-  VolcanicAsh = 762,
-  Squalls = 771,
-  Tornado = 781,
-}
+export const AtmosphereConditions = {
+  Mist: 701,
+  Smoke: 711,
+  Haze: 721,
+  SandDustWhirls: 731,
+  Fog: 741,
+  Sand: 751,
+  Dust: 761,
+  VolcanicAsh: 762,
+  Squalls: 771,
+  Tornado: 781,
+};
 
-export enum CloudsConditions {
-  ClearSky = 800,
-  FewClouds = 801,
-  ScatteredClouds = 802,
-  BrokenClouds = 803,
-  OvercastClouds = 804,
-}
+export const CloudsConditions = {
+  ClearSky: 800,
+  FewClouds: 801,
+  ScatteredClouds: 802,
+  BrokenClouds: 803,
+  OvercastClouds: 804,
+};

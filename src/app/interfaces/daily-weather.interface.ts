@@ -1,12 +1,3 @@
-import {
-  AtmosphereConditions,
-  CloudsConditions,
-  DrizzleConditions,
-  RainConditions,
-  SnowConditions,
-  ThunderstormConditions,
-} from '../enums/weather-conditions.enum';
-
 export interface Daily {
   dt: number;
   sunrise: number;
@@ -36,13 +27,7 @@ export interface Daily {
   wind_gust: number;
   weather: [
     {
-      id:
-        | AtmosphereConditions
-        | CloudsConditions
-        | DrizzleConditions
-        | RainConditions
-        | SnowConditions
-        | ThunderstormConditions;
+      id: number;
       main: string;
       description: string;
       icon: string;
