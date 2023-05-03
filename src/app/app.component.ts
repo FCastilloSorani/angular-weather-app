@@ -21,10 +21,10 @@ import { WeatherService } from './services/weather.service';
 export class AppComponent implements OnInit {
   fetchedCurrentWeather!: CurrentWeather;
 
+  ready: boolean = false;
+
   getCurrentCoords: Observable<CurrentCoords> =
     this.geolocationService.getCurrentCoords();
-
-  ready: boolean = false;
 
   constructor(
     private geolocationService: GeolocationService,
@@ -36,8 +36,7 @@ export class AppComponent implements OnInit {
       .pipe(
         switchMap((_currentCoords: CurrentCoords) => {
           return iif(
-            () =>
-              _currentCoords.latitude !== 0 && _currentCoords.longitude !== 0,
+            () => !!_currentCoords.latitude && !!_currentCoords.longitude,
             this.weatherService.getWeather(
               _currentCoords.latitude!,
               _currentCoords.longitude!
@@ -46,8 +45,6 @@ export class AppComponent implements OnInit {
         }),
         tap((_weather: Weather) => {
           this.fetchedCurrentWeather = this.weatherService.getCurrent(_weather);
-        }),
-        tap(() => {
           this.ready = true;
         })
       )
