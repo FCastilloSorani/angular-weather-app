@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 // Environment
 import { environment } from 'src/environments/environment';
 
+// HTTP
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 // Interfaces
 import { CurrentWeather } from '../interfaces/current-weather.interface';
 import { Daily } from '../interfaces/daily-weather.interface';
 import { Hourly } from '../interfaces/hourly-weather.interface';
 import { Weather } from '../interfaces/weather.interface';
-
-// HTTP
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // RxJS
 import { catchError } from 'rxjs/operators';
