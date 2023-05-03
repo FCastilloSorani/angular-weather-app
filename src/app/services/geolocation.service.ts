@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 // Environment
 import { environment } from 'src/environments/environment';
 
-// Interfaces
-import { CurrentCoords } from '../interfaces/current-coords.interface';
-
 // HTTP
 import { HttpErrorResponse } from '@angular/common/http';
 
+// Interfaces
+import { CurrentCoords } from '../interfaces/current-coords.interface';
+
 // RxJS
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
